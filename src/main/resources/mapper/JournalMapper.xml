@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wechat.dao.JournalMapper">
+  <resultMap id="BaseResultMap" type="cn.wechat.pojo.Journal">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="openid" jdbcType="VARCHAR" property="openid" />
+      <result column="journal_title" jdbcType="VARCHAR" property="journalTitle" />
+      <result column="journal_content" jdbcType="VARCHAR" property="journalContent" />
+      <result column="journal_date" jdbcType="TIMESTAMP" property="journalDate" />
+      <result column="journal_week" jdbcType="VARCHAR" property="journalWeek" />
+      <result column="journal_mood" jdbcType="VARCHAR" property="journalMood" />
+      <result column="weather" jdbcType="VARCHAR" property="weather" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, openid, journal_title, journal_content, journal_date, journal_week, journal_mood,
+    weather
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from journal
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectByOpenid"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from journal
+        where openid = #{openid,jdbcType=INTEGER}
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from journal
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteById" >
+    delete from journal
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.wechat.pojo.Journal">
+    insert into journal (id, user_id, journal_title, 
+      journal_content, journal_date, journal_week, 
+      journal_mood, weather)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{journalTitle,jdbcType=VARCHAR}, 
+      #{journalContent,jdbcType=VARCHAR}, #{journalDate,jdbcType=TIMESTAMP}, #{journalWeek,jdbcType=VARCHAR}, 
+      #{journalMood,jdbcType=VARCHAR}, #{weather,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.wechat.pojo.Journal">
+    insert into journal
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="journalTitle != null">
+        journal_title,
+      </if>
+      <if test="journalContent != null">
+        journal_content,
+      </if>
+      <if test="journalDate != null">
+        journal_date,
+      </if>
+      <if test="journalWeek != null">
+        journal_week,
+      </if>
+      <if test="journalMood != null">
+        journal_mood,
+      </if>
+      <if test="weather != null">
+        weather,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="journalTitle != null">
+        #{journalTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="journalContent != null">
+        #{journalContent,jdbcType=VARCHAR},
+      </if>
+      <if test="journalDate != null">
+        #{journalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="journalWeek != null">
+        #{journalWeek,jdbcType=VARCHAR},
+      </if>
+      <if test="journalMood != null">
+        #{journalMood,jdbcType=VARCHAR},
+      </if>
+      <if test="weather != null">
+        #{weather,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.wechat.pojo.Journal">
+    update journal
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="journalTitle != null">
+        journal_title = #{journalTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="journalContent != null">
+        journal_content = #{journalContent,jdbcType=VARCHAR},
+      </if>
+      <if test="journalDate != null">
+        journal_date = #{journalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="journalWeek != null">
+        journal_week = #{journalWeek,jdbcType=VARCHAR},
+      </if>
+      <if test="journalMood != null">
+        journal_mood = #{journalMood,jdbcType=VARCHAR},
+      </if>
+      <if test="weather != null">
+        weather = #{weather,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.wechat.pojo.Journal">
+    update journal
+    set user_id = #{userId,jdbcType=VARCHAR},
+      journal_title = #{journalTitle,jdbcType=VARCHAR},
+      journal_content = #{journalContent,jdbcType=VARCHAR},
+      journal_date = #{journalDate,jdbcType=TIMESTAMP},
+      journal_week = #{journalWeek,jdbcType=VARCHAR},
+      journal_mood = #{journalMood,jdbcType=VARCHAR},
+      weather = #{weather,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateById" parameterType="cn.wechat.pojo.Journal">
+    update journal
+    set user_id = #{userId,jdbcType=VARCHAR},
+      journal_title = #{journalTitle,jdbcType=VARCHAR},
+      journal_content = #{journalContent,jdbcType=VARCHAR},
+      journal_date = #{journalDate,jdbcType=TIMESTAMP},
+      journal_week = #{journalWeek,jdbcType=VARCHAR},
+      journal_mood = #{journalMood,jdbcType=VARCHAR},
+      weather = #{weather,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>点滴生活后台登录</title>
+	<meta name="renderer" content="webkit">	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<!-- load css -->
+	<link rel="stylesheet" type="text/css" href="common/layui/css/layui.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/login.css" media="all">
+</head>
+<body>
+<div class="layui-layout layui-layout-login">
+    <h1>
+        <strong>点滴生活后台管理系统</strong>
+        <em>DripLife System</em>
+    </h1>
+    <div class="layui-user-icon larry-login"><input type="text" id="adminId" placeholder="账户" class="login_txtbx" />    </div>
+    <div class="layui-pwd-icon larry-login"> <input type="password" id="password" placeholder="密码" class="login_txtbx"/></div>
+    <div class="layui-submit larry-login">   <input type="button" value="立即登陆" class="submit_btn"/>                   </div>
+    <div class="layui-login-text">
+        <p>@2019-4-6 JF-kk</p>
+    </div>
+</div>
+<script type="text/javascript" src="common/layui/lay/dest/layui.all.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+<script type="text/javascript" src="jsplug/jparticle.jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	//登录链接
+	$(".submit_btn").click(function(){
+        $.ajax({
+            type:'post',
+            url : '../admin/login',
+            data:{
+                "adminId":$("#adminId").val(),
+                "password":$("#password").val()
+            },
+            /*//设置contentType类型为json
+            contentType : 'application/json;charset=utf-8',*/
+            dataType:"json",
+            //请求成功后的回调函数
+            success:function(data) {
+                /*
+                 *   此处的data为一个json格式的对象；是你的检验文件返回的数据;是服务器返回的登陆结果
+                 *   {'status':true,'msg':'登陆成功'} {'status':false,'msg':'密码错误'}    验证反馈结果
+                 */
+                if(data.judge =="true" ){
+                    // alert("登陆成功!前往主页...");
+                    // document.getElementsByTagName('b')[0].innerHTML=data.change;
+                    window.location.href="index.html";
+                }
+                else{
+                    alert("账号或密码错误!");
+                }
+            },
+            error : function() {
+                alert("登陆异常!");
+            }
+        });
+	});
+});
+</script>
+</body>
+</html>

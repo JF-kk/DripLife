@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wechat.dao.CookMapper">
+  <resultMap id="BaseResultMap" type="cn.wechat.pojo.Cook">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="cook_mood" jdbcType="VARCHAR" property="cookMood" />
+    <result column="cook_season" jdbcType="VARCHAR" property="cookSeason" />
+    <result column="cook_title" jdbcType="VARCHAR" property="cookTitle" />
+    <result column="cook_food" jdbcType="VARCHAR" property="cookFood" />
+    <result column="cook_way" jdbcType="VARCHAR" property="cookWay" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, cook_mood, cook_season, cook_title, cook_food, cook_way
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cook
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectByChoose" parameterType="cn.wechat.pojo.Cook" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from cook
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cook
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.wechat.pojo.Cook">
+    insert into cook (id, user_id, cook_mood, 
+      cook_season, cook_title, cook_food, 
+      cook_way)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{cookMood,jdbcType=VARCHAR}, 
+      #{cookSeason,jdbcType=VARCHAR}, #{cookTitle,jdbcType=VARCHAR}, #{cookFood,jdbcType=VARCHAR}, 
+      #{cookWay,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.wechat.pojo.Cook">
+    insert into cook
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="cookMood != null">
+        cook_mood,
+      </if>
+      <if test="cookSeason != null">
+        cook_season,
+      </if>
+      <if test="cookTitle != null">
+        cook_title,
+      </if>
+      <if test="cookFood != null">
+        cook_food,
+      </if>
+      <if test="cookWay != null">
+        cook_way,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="cookMood != null">
+        #{cookMood,jdbcType=VARCHAR},
+      </if>
+      <if test="cookSeason != null">
+        #{cookSeason,jdbcType=VARCHAR},
+      </if>
+      <if test="cookTitle != null">
+        #{cookTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="cookFood != null">
+        #{cookFood,jdbcType=VARCHAR},
+      </if>
+      <if test="cookWay != null">
+        #{cookWay,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.wechat.pojo.Cook">
+    update cook
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="cookMood != null">
+        cook_mood = #{cookMood,jdbcType=VARCHAR},
+      </if>
+      <if test="cookSeason != null">
+        cook_season = #{cookSeason,jdbcType=VARCHAR},
+      </if>
+      <if test="cookTitle != null">
+        cook_title = #{cookTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="cookFood != null">
+        cook_food = #{cookFood,jdbcType=VARCHAR},
+      </if>
+      <if test="cookWay != null">
+        cook_way = #{cookWay,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.wechat.pojo.Cook">
+    update cook
+    set user_id = #{userId,jdbcType=VARCHAR},
+      cook_mood = #{cookMood,jdbcType=VARCHAR},
+      cook_season = #{cookSeason,jdbcType=VARCHAR},
+      cook_title = #{cookTitle,jdbcType=VARCHAR},
+      cook_food = #{cookFood,jdbcType=VARCHAR},
+      cook_way = #{cookWay,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

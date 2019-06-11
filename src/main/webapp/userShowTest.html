@@ -1,0 +1,93 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> 查看用户 </title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <!--导入 jQuery 库-->
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                type:'post',
+                url : '../user/getUser',
+                data:{
+                },
+                dataType:"json",
+                success:function(data) {
+                    for(var i=0;i<data.length;i++){
+                        var str="<tr><td>"+data[i].id+"</td><td>"+data[i].userId+"</td><td>" +
+                            "<a href=\"#\">1. 编辑</a>" +
+                            "<a href=\"#\">2. 下载</a>" +
+                            "<a href=\"#\">3. 删除</a>" + "</td></tr>"
+                        $('#user').append(str);
+                    }
+                },
+                error : function() {
+                    alert("错误");
+                }
+            });
+        })
+    </script>
+
+</head>
+<body>
+
+
+<div class="am-cf admin-main">
+    <!-- content start -->
+    <div class="admin-content">
+
+        <div class="am-g">
+            <div class="am-u-sm-12">
+                <table class="am-table am-table-bd am-table-striped admin-content-table">
+                    <thead>
+                    <tr>
+                        <th>ID</th><th>用户名</th><th>管理</th>
+                    </tr>
+                    </thead>
+                    <tbody id="user">
+                        <!--<tr>
+                            <td>1</td>
+                            <td>John Clark</td>
+
+                            <td>
+                                <a href="#">1. 编辑</a>
+                                <a href="#">2. 下载</a>
+                                <a href="#">3. 删除</a>
+                            </td>
+                        </tr>-->
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- content end -->
+</div>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/polyfill/rem.min.js"></script>
+<script src="assets/js/polyfill/respond.min.js"></script>
+<script src="assets/js/amazeui.legacy.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/amazeui.min.js"></script>
+<!--<![endif]-->
+<script src="assets/js/app.js"></script>
+</body>
+</html>

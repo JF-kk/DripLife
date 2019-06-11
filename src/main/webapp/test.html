@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试页面专用2号</title>
+    <!--导入 jQuery 库-->
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                type:'post',
+                url : '../admin/adminCheck',
+                dataType:"json",
+                success:function(data) {
+                    alert(data.adminId);
+                    console.log(data);
+                    /*for(var i=0;i<data.length;i++){
+                        var str="<tr><td>"+data[i].id+"</td><td>"+data[i].userId+"</td><td>" +
+                            "<a href=\"#\">1. 编辑</a>" +
+                            "<a href=\"#\">2. 下载</a>" +
+                            "<a href=\"#\">3. 删除</a>" + "</td></tr>"
+                        $('#user').append(str);
+                    }*/
+                }
+            });
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

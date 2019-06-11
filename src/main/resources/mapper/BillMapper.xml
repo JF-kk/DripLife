@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wechat.dao.BillMapper">
+  <resultMap id="BaseResultMap" type="cn.wechat.pojo.Bill">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="openid" jdbcType="VARCHAR" property="openid" />
+      <result column="bill_activity" jdbcType="VARCHAR" property="billActivity" />
+      <result column="bill_type" jdbcType="VARCHAR" property="billType" />
+      <result column="bill_money" jdbcType="DOUBLE" property="billMoney" />
+      <result column="bill_date" jdbcType="TIMESTAMP" property="billDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, openid, bill_activity, bill_type, bill_money, bill_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bill
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bill
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.wechat.pojo.Bill">
+    insert into bill (id, user_id, bill_activity, 
+      bill_type, bill_money, bill_date
+      )
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{billActivity,jdbcType=VARCHAR}, 
+      #{billType,jdbcType=VARCHAR}, #{billMoney,jdbcType=DOUBLE}, #{billDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.wechat.pojo.Bill">
+    insert into bill
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="billActivity != null">
+        bill_activity,
+      </if>
+      <if test="billType != null">
+        bill_type,
+      </if>
+      <if test="billMoney != null">
+        bill_money,
+      </if>
+      <if test="billDate != null">
+        bill_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="billActivity != null">
+        #{billActivity,jdbcType=VARCHAR},
+      </if>
+      <if test="billType != null">
+        #{billType,jdbcType=VARCHAR},
+      </if>
+      <if test="billMoney != null">
+        #{billMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="billDate != null">
+        #{billDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.wechat.pojo.Bill">
+    update bill
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="billActivity != null">
+        bill_activity = #{billActivity,jdbcType=VARCHAR},
+      </if>
+      <if test="billType != null">
+        bill_type = #{billType,jdbcType=VARCHAR},
+      </if>
+      <if test="billMoney != null">
+        bill_money = #{billMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="billDate != null">
+        bill_date = #{billDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.wechat.pojo.Bill">
+    update bill
+    set user_id = #{userId,jdbcType=VARCHAR},
+      bill_activity = #{billActivity,jdbcType=VARCHAR},
+      bill_type = #{billType,jdbcType=VARCHAR},
+      bill_money = #{billMoney,jdbcType=DOUBLE},
+      bill_date = #{billDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="selectByOpenid"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from bill
+        where openid = #{openid,jdbcType=VARCHAR}
+    </select>
+    <select id="selectById"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from bill
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from bill
+        where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <update id="updateById" parameterType="cn.wechat.pojo.Bill">
+    update bill
+    set user_id = #{userId,jdbcType=VARCHAR},
+      bill_activity = #{billActivity,jdbcType=VARCHAR},
+      bill_type = #{billType,jdbcType=VARCHAR},
+      bill_money = #{billMoney,jdbcType=DOUBLE},
+      bill_date = #{billDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
